@@ -31,7 +31,7 @@ mongoose
 // });
 
 app.get("*", function(req, res) {
-  res.sendFile(Path.join(__dirname + "/public/app/views/index.html"));
+  res.sendFile(path.join(__dirname + "/public/app/views/index.html"));
 });
 
 app.listen(port, function() {
