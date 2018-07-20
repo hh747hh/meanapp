@@ -1,7 +1,7 @@
 var User = require("../models/user");
 
 module.exports = function(router) {
-  //http://localhost:5000/users
+  //http://localhost:5000/api/users
   router.post("/users", function(req, res) {
     var user = new User();
     user.username = req.body.username;
@@ -16,13 +16,21 @@ module.exports = function(router) {
       req.body.email === "";
 
     if (invalid) {
-      res.send("Email, Password and Username must be provided");
+      res.json({
+        success: false,
+        message: "Email, Password and Username must be provided"
+      });
     } else {
       user.save(function(err) {
         if (err) {
-          res.send("UserName or Email already exist.");
+          res.json({
+            success: false,
+            message: "UserName or Email already exist."
+          });
+          // res.send("UserName or Email already exist.");
         } else {
-          res.send("User created!");
+          // res.send("User created!");
+          res.json({ success: true, message: "User created!" });
         }
       });
     }
